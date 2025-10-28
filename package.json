@@ -1,0 +1,20 @@
+{
+  "name": "faq-search",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Мини-сайт с поиском по FAQ.md и локальным дев-сервером",
+  "scripts": {
+    "build:data": "node scripts/extract.js",
+    "watch:data": "chokidar \"FAQ.md\" -c \"node scripts/extract.js\"",
+    "serve": "live-server public --port=5173 --no-browser --wait=200",
+    "open": "start \"\" \"http://localhost:5173\"",
+    "dev": "concurrently -k -n WATCH,SERVE \"npm:watch:data\" \"npm:serve\""
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.0.0",
+    "live-server": "^1.2.2"
+  }
+}
+
+
