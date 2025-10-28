@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FAQ Поиск</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" href="data.js" as="script">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* Критически важные стили inline для мгновенного TTI */
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.45}
+    .container{max-width:1000px;margin:0 auto;padding:16px}
+    .search{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:10}
+    input[type="search"]{width:100%;padding:12px 14px;font-size:16px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--fg)}
+    .meta{display:flex;gap:12px;align-items:center;margin-top:8px;color:var(--muted);font-size:12px}
+    .results{margin-top:16px;display:grid;gap:12px}
+    .card{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface)}
+    .q{font-weight:600;margin:0 0 6px 0}
+    .a{white-space:pre-wrap;margin:0}
+    .hl{background:color-mix(in srgb, var(--accent) 20%, transparent);padding:0 2px;border-radius:4px}
+  </style>
+  <script>
+    (function(){
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const root = document.documentElement;
+      const light = {bg:'#ffffff', surface:'#fff', fg:'#111', border:'#e5e7eb', muted:'#6b7280', accent:'#2563eb'};
+      const dark  = {bg:'#0b0f14', surface:'#0f141a', fg:'#e5e7eb', border:'#1f2937', muted:'#9ca3af', accent:'#60a5fa'};
+      const p = prefersDark ? dark : light;
+      for (const [k,v] of Object.entries(p)) root.style.setProperty(`--${k}`, v);
+      document.addEventListener('DOMContentLoaded',()=>document.body.style.background='var(--bg)');
+    })();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="search">
+      <input id="q" type="search" placeholder="Поиск по вопросу и ответу… (например: \u201Cрежими функціонування\u201D)" autocomplete="off" autofocus>
+      <div class="meta"><span id="count">Загружаю…</span><span id="time"></span></div>
+    </div>
+    <div id="results" class="results"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
