@@ -1,0 +1,15 @@
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{color:var(--fg)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.muted{color:var(--muted)}
+
+/* Небольшие улучшения печати */
+@media print{
+  .search{position:static}
+  input[type="search"],.meta{display:none}
+}
+
+
